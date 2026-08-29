@@ -66,6 +66,23 @@
   }
   nav .sep{ color:#444; margin:0 8px; }
 
+  /* ---- 연도 제목 ---- */
+  .year-title{
+    color:#fff;
+    font-weight:normal;
+    font-size:15px;
+    letter-spacing:.25em;
+    text-align:center;
+    margin:0 0 40px;
+  }
+
+  .empty-note{
+    text-align:center;
+    font-size:13px;
+    color:#555;
+    font-style:italic;
+  }
+
   /* ---- 항목 ---- */
   .entry{ margin:0 0 56px; }
 
@@ -94,6 +111,7 @@
     width:100%;
     height:auto;
     margin:0 0 18px;
+    filter:grayscale(100%);
     border:1px solid #333;
   }
 
@@ -125,41 +143,60 @@
 <p class="subtitle">Personal Project Archive</p>
 
 <!-- ==========================================================
-     목차(nav) — 새 항목을 추가할 때마다 여기에도 링크 한 줄을
-     추가하세요. href는 해당 entry의 id와 일치해야 합니다.
+     연도 목차(nav) — 새로운 연도가 생기면 여기에 링크 한 칸을
+     추가하세요. href는 아래 <section id="year-XXXX"> 의 id와
+     똑같아야 합니다. 최신 연도를 왼쪽에 두는 걸 추천합니다.
      ========================================================== -->
-<!-- 항목이 하나뿐일 때는 목차(nav)를 굳이 안 보여줘도 됩니다.
-     항목이 2개 이상 되면 아래 주석을 참고해서 nav를 다시 켜세요. -->
-
-<!--
 <nav>
-  <a href="#entry-001">001</a><span class="sep">·</span><a href="#entry-002">002</a>
+  <a href="#year-2026">2026</a><span class="sep">·</span><a href="#year-2025">2025</a>
 </nav>
+
 <hr>
--->
 
 <!-- ==========================================================
-     ENTRY 템플릿 — 새 작업을 추가하려면 이 <div class="entry">
-     블록 전체를 복사해서 </body> 위에 붙여넣고
-     번호/id/내용을 바꾸세요. 이미지가 2개 이상 되면
-     위쪽 nav 주석도 풀어서 링크를 추가하세요.
+     연도 섹션 — 새 연도를 통째로 추가하려면 이 <section>
+     블록 전체를 복사해서 붙여넣고, id와 제목 숫자를
+     새 연도로 바꾸세요. 그리고 위쪽 nav에도 링크를
+     추가하는 걸 잊지 마세요.
      ========================================================== -->
 
-<div class="entry" id="entry-001">
-  <p class="entry-no">NO. 001</p>
-  <h2>첫 번째 작업 제목</h2>
-  <p class="entry-date">2026. 08</p>
+<section id="year-2026">
+  <h2 class="year-title">2026</h2>
 
-  <img src="project-01.jpg" alt="작업 01 이미지">
+  <!-- ----------------------------------------------------------
+       ENTRY 템플릿 — 이 연도 안에 새 작업을 추가하려면
+       이 <div class="entry"> 블록 전체를 복사해서
+       바로 아래(같은 연도 섹션 안)에 붙여넣고
+       번호/id/내용만 바꾸세요.
+       ---------------------------------------------------------- -->
 
-  <p>
-    여기에 작업에 대한 설명을 씁니다. 어떤 계기로 시작했는지,
-    어떤 재료나 방법을 사용했는지, 무엇을 표현하고 싶었는지
-    자유롭게 적으면 됩니다.
-  </p>
+  <div class="entry" id="entry-001">
+    <p class="entry-no">NO. 001</p>
+    <h2>첫 번째 작업 제목</h2>
+    <p class="entry-date">2026. 08</p>
 
-  <a class="top-link" href="#top">↑ 맨 위로</a>
-</div>
+    <img src="project-01.jpg" alt="작업 01 이미지">
+
+    <p>
+      여기에 작업에 대한 설명을 씁니다. 어떤 계기로 시작했는지,
+      어떤 재료나 방법을 사용했는지, 무엇을 표현하고 싶었는지
+      자유롭게 적으면 됩니다.
+    </p>
+
+    <a class="top-link" href="#top">↑ 맨 위로</a>
+  </div>
+
+</section>
+
+<hr>
+
+<!-- 2025년 작업이 생기면 이 섹션 안에 위와 같은 방식으로
+     entry 블록을 추가하면 됩니다. 지금은 비어있어도 됩니다. -->
+
+<section id="year-2025">
+  <h2 class="year-title">2025</h2>
+  <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+</section>
 
 <hr>
 
