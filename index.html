@@ -6,33 +6,24 @@
 <title>MY ARCHIVE</title>
 <style>
 
-  /* ==========================================================
-     의도적으로 아주 단순하게 짰습니다.
-     - 시스템 폰트만 사용 (외부 웹폰트 없음 → 로딩 실패 없음)
-     - 이미지가 없어도 텍스트만으로 완전히 읽힘
-     - JS 없음, 프레임워크 없음 → 웹이 있는 한 계속 열림
-     ========================================================== */
-
   body{
     background:#000;
     color:#cfcfcf;
     font-family: Georgia, "Times New Roman", Times, serif;
     font-size:16px;
     line-height:1.7;
-    max-width:720px;
+    max-width:640px;
     margin:0 auto;
     padding:40px 20px 120px;
   }
 
-  a{
-    color:#cfcfcf;
-  }
+  a{ color:#cfcfcf; }
   a:hover{ color:#fff; }
 
   hr{
     border:none;
     border-top:1px solid #333;
-    margin:48px 0;
+    margin:40px 0;
   }
 
   h1{
@@ -53,79 +44,64 @@
     margin:0 0 40px;
   }
 
-  /* ---- 목차 (classic nav) ---- */
-  nav{
+  nav.years{
     text-align:center;
     font-size:13px;
     margin-bottom:40px;
     color:#888;
   }
-  nav a{
+  nav.years a{
     text-decoration:none;
     border-bottom:1px dotted #555;
   }
-  nav .sep{ color:#444; margin:0 8px; }
+  nav.years .sep{ color:#444; margin:0 8px; }
 
-  /* ---- 연도 제목 ---- */
   .year-title{
     color:#fff;
     font-weight:normal;
     font-size:15px;
     letter-spacing:.25em;
-    text-align:center;
-    margin:0 0 40px;
+    margin:0 0 22px;
   }
 
   .empty-note{
-    text-align:center;
     font-size:13px;
     color:#555;
     font-style:italic;
   }
 
-  /* ---- 항목 ---- */
-  .entry{ margin:0 0 56px; }
-
-  .entry-no{
-    font-size:12px;
-    letter-spacing:.15em;
-    color:#666;
-    margin:0 0 6px;
+  /* ---- 목록 항목 ---- */
+  ul.list{
+    list-style:none;
+    margin:0 0 20px;
+    padding:0;
   }
-
-  .entry h2{
+  ul.list li{
+    margin:0 0 22px;
+  }
+  ul.list a.title-link{
+    display:block;
+    font-size:19px;
     color:#fff;
-    font-weight:normal;
-    font-size:21px;
-    margin:0 0 4px;
+    text-decoration:none;
+    border-bottom:1px solid transparent;
   }
-
-  .entry-date{
+  ul.list a.title-link:hover{
+    border-bottom:1px solid #555;
+  }
+  ul.list .list-no{
+    font-size:12px;
+    letter-spacing:.1em;
+    color:#666;
+    display:block;
+    margin-bottom:4px;
+  }
+  ul.list .list-date{
     font-size:12px;
     color:#777;
-    margin:0 0 18px;
-  }
-
-  .entry img{
     display:block;
-    width:100%;
-    height:auto;
-    margin:0 0 18px;
-    border:1px solid #333;
+    margin-top:4px;
   }
-
-  .entry p{
-    margin:0 0 1em;
-  }
-
-  .entry .top-link{
-    display:block;
-    margin-top:18px;
-    font-size:12px;
-    color:#555;
-    text-decoration:none;
-  }
-  .entry .top-link:hover{ color:#999; }
 
   footer{
     text-align:center;
@@ -142,83 +118,46 @@
 <p class="subtitle">Personal Project Archive</p>
 
 <!-- ==========================================================
-     연도 목차(nav) — 새로운 연도가 생기면 여기에 링크 한 칸을
+     연도 목차(nav) — 새 연도가 생기면 여기에 링크 한 칸을
      추가하세요. href는 아래 <section id="year-XXXX"> 의 id와
-     똑같아야 합니다. 최신 연도를 왼쪽에 두는 걸 추천합니다.
+     똑같아야 합니다.
      ========================================================== -->
-<nav>
+<nav class="years">
   <a href="#year-2026">2026</a><span class="sep">·</span><a href="#year-2025">2025</a>
 </nav>
 
 <hr>
 
 <!-- ==========================================================
-     연도 섹션 — 새 연도를 통째로 추가하려면 이 <section>
-     블록 전체를 복사해서 붙여넣고, id와 제목 숫자를
-     새 연도로 바꾸세요. 그리고 위쪽 nav에도 링크를
-     추가하는 걸 잊지 마세요.
+     연도별 작업 목록 — 새 작업을 추가하려면:
+     1) entry-XXX.html 이라는 새 파일을 만들고 (아래 개별 페이지와
+        같은 형식으로 내용을 채운 뒤)
+     2) 이 목록에 <li> 한 줄을 추가해서 그 파일로 링크하세요.
      ========================================================== -->
 
 <section id="year-2026">
   <h2 class="year-title">2026</h2>
 
-  <!-- ----------------------------------------------------------
-       ENTRY 템플릿 — 이 연도 안에 새 작업을 추가하려면
-       이 <div class="entry"> 블록 전체를 복사해서
-       바로 아래(같은 연도 섹션 안)에 붙여넣고
-       번호/id/내용만 바꾸세요.
-       ---------------------------------------------------------- -->
-
-  <div class="entry" id="entry-001">
-    <p class="entry-no">NO. 001</p>
-    <h2>첫 번째 작업 제목</h2>
-    <p class="entry-date">2026. 08</p>
-
-    <img src="project-01.jpg" alt="작업 01 이미지">
-
-    <p>
-      여기에 작업에 대한 설명을 씁니다. 어떤 계기로 시작했는지,
-      어떤 재료나 방법을 사용했는지, 무엇을 표현하고 싶었는지
-      자유롭게 적으면 됩니다.
-    </p>
-
-    <a class="top-link" href="#top">↑ 맨 위로</a>
-  </div>
-
-  <div class="entry" id="entry-002">
-    <p class="entry-no">NO. 002</p>
-    <h2>두 번째 작업 제목</h2>
-    <p class="entry-date">2026. 08</p>
-
-    <img src="project-02.jpg" alt="작업 02 이미지">
-
-    <p>
-      여기에 두 번째 작업 설명을 씁니다.
-    </p>
-
-    <a class="top-link" href="#top">↑ 맨 위로</a>
-  </div>
-
-  <div class="entry" id="entry-003">
-    <p class="entry-no">NO. 003</p>
-    <h2>세 번째 작업 제목</h2>
-    <p class="entry-date">2026. 08</p>
-
-    <img src="project-03.jpg" alt="작업 03 이미지">
-
-    <p>
-      여기에 세 번째 작업 설명을 씁니다.
-    </p>
-
-    <a class="top-link" href="#top">↑ 맨 위로</a>
-  </div>
-
+  <ul class="list">
+    <li>
+      <span class="list-no">NO. 001</span>
+      <a class="title-link" href="entry-001.html">첫 번째 작업 제목</a>
+      <span class="list-date">2026. 08</span>
+    </li>
+    <li>
+      <span class="list-no">NO. 002</span>
+      <a class="title-link" href="entry-002.html">두 번째 작업 제목</a>
+      <span class="list-date">2026. 08</span>
+    </li>
+    <li>
+      <span class="list-no">NO. 003</span>
+      <a class="title-link" href="entry-003.html">세 번째 작업 제목</a>
+      <span class="list-date">2026. 08</span>
+    </li>
+  </ul>
 </section>
 
 <hr>
-
-<!-- 2025년 작업이 생기면 이 섹션 안에 위와 같은 방식으로
-     entry 블록을 추가하면 됩니다. 지금은 비어있어도 됩니다. -->
 
 <section id="year-2025">
   <h2 class="year-title">2025</h2>
