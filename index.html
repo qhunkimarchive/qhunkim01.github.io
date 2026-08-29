@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY ARCHIVE</title>
+<style>
+
+  /* ==========================================================
+     의도적으로 아주 단순하게 짰습니다.
+     - 시스템 폰트만 사용 (외부 웹폰트 없음 → 로딩 실패 없음)
+     - 이미지가 없어도 텍스트만으로 완전히 읽힘
+     - JS 없음, 프레임워크 없음 → 웹이 있는 한 계속 열림
+     ========================================================== */
+
+  body{
+    background:#000;
+    color:#cfcfcf;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size:16px;
+    line-height:1.7;
+    max-width:720px;
+    margin:0 auto;
+    padding:40px 20px 120px;
+  }
+
+  a{
+    color:#cfcfcf;
+  }
+  a:hover{ color:#fff; }
+
+  hr{
+    border:none;
+    border-top:1px solid #333;
+    margin:48px 0;
+  }
+
+  h1{
+    color:#fff;
+    font-weight:normal;
+    font-size:28px;
+    letter-spacing:.08em;
+    text-align:center;
+    margin:0 0 4px;
+  }
+
+  .subtitle{
+    text-align:center;
+    font-size:13px;
+    letter-spacing:.15em;
+    color:#777;
+    text-transform:uppercase;
+    margin:0 0 40px;
+  }
+
+  /* ---- 목차 (classic nav) ---- */
+  nav{
+    text-align:center;
+    font-size:13px;
+    margin-bottom:40px;
+    color:#888;
+  }
+  nav a{
+    text-decoration:none;
+    border-bottom:1px dotted #555;
+  }
+  nav .sep{ color:#444; margin:0 8px; }
+
+  /* ---- 항목 ---- */
+  .entry{ margin:0 0 56px; }
+
+  .entry-no{
+    font-size:12px;
+    letter-spacing:.15em;
+    color:#666;
+    margin:0 0 6px;
+  }
+
+  .entry h2{
+    color:#fff;
+    font-weight:normal;
+    font-size:21px;
+    margin:0 0 4px;
+  }
+
+  .entry-date{
+    font-size:12px;
+    color:#777;
+    margin:0 0 18px;
+  }
+
+  .entry img{
+    display:block;
+    width:100%;
+    height:auto;
+    margin:0 0 18px;
+    filter:grayscale(100%);
+    border:1px solid #333;
+  }
+
+  .entry p{
+    margin:0 0 1em;
+  }
+
+  .entry .top-link{
+    display:block;
+    margin-top:18px;
+    font-size:12px;
+    color:#555;
+    text-decoration:none;
+  }
+  .entry .top-link:hover{ color:#999; }
+
+  footer{
+    text-align:center;
+    font-size:12px;
+    color:#555;
+    margin-top:60px;
+  }
+
+</style>
+</head>
+<body>
+
+<h1 id="top">M Y &nbsp; A R C H I V E</h1>
+<p class="subtitle">Personal Project Archive</p>
+
+<!-- ==========================================================
+     목차(nav) — 새 항목을 추가할 때마다 여기에도 링크 한 줄을
+     추가하세요. href는 해당 entry의 id와 일치해야 합니다.
+     ========================================================== -->
+<!-- 항목이 하나뿐일 때는 목차(nav)를 굳이 안 보여줘도 됩니다.
+     항목이 2개 이상 되면 아래 주석을 참고해서 nav를 다시 켜세요. -->
+
+<!--
+<nav>
+  <a href="#entry-001">001</a><span class="sep">·</span><a href="#entry-002">002</a>
+</nav>
+<hr>
+-->
+
+<!-- ==========================================================
+     ENTRY 템플릿 — 새 작업을 추가하려면 이 <div class="entry">
+     블록 전체를 복사해서 </body> 위에 붙여넣고
+     번호/id/내용을 바꾸세요. 이미지가 2개 이상 되면
+     위쪽 nav 주석도 풀어서 링크를 추가하세요.
+     ========================================================== -->
+
+<div class="entry" id="entry-001">
+  <p class="entry-no">NO. 001</p>
+  <h2>첫 번째 작업 제목</h2>
+  <p class="entry-date">2026. 08</p>
+
+  <img src="project-01.jpg" alt="작업 01 이미지">
+
+  <p>
+    여기에 작업에 대한 설명을 씁니다. 어떤 계기로 시작했는지,
+    어떤 재료나 방법을 사용했는지, 무엇을 표현하고 싶었는지
+    자유롭게 적으면 됩니다.
+  </p>
+
+  <a class="top-link" href="#top">↑ 맨 위로</a>
+</div>
+
+<hr>
+
+<footer>
+  © 2026 MY ARCHIVE
+</footer>
+
+</body>
+</html>
