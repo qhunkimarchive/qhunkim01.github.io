@@ -146,12 +146,6 @@
     color:#fff;
     font-weight:normal;
     font-size:21px;
-    margin:0 0 4px;
-  }
-
-  .entry-date{
-    font-size:12px;
-    color:#777;
     margin:0 0 18px;
   }
 
@@ -226,11 +220,47 @@
 
   <details id="d-2025">
     <summary>2025</summary>
-    <ul class="list">
-      <li><span class="list-no">A</span><a class="title-link" href="#work-2025-A">Stillness Between Movements</a></li>
-      <li><span class="list-no">B</span><a class="title-link" href="#work-2025-B">제목을 입력하세요</a></li>
-      <li><span class="list-no">C</span><a class="title-link" href="#work-2025-C">제목을 입력하세요</a></li>
-    </ul>
+
+    <!-- ==========================================================
+         새 작업을 추가하려면 이 <details> 태그 안에
+         <div class="entry"> 블록 하나만 붙여넣으면 끝입니다.
+         번호(2025 · D 등), 위 목록의 제목 링크, "← 목록으로"
+         버튼까지 전부 자동으로 만들어집니다. 신경 쓸 게 없어요.
+         ========================================================== -->
+
+    <div class="entry">
+      <h3>Stillness Between Movements</h3>
+      <div class="gallery">
+        <img src="2025-A-01.jpg" alt="Stillness Between Movements 이미지 1">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+      </div>
+      <p>
+        여기에 작업에 대한 설명을 씁니다.
+      </p>
+    </div>
+
+    <div class="entry">
+      <h3>제목을 입력하세요</h3>
+      <div class="gallery">
+        <img src="2025-B-01.jpg" alt="작업 이미지 1">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+      </div>
+      <p>
+        여기에 작업에 대한 설명을 씁니다.
+      </p>
+    </div>
+
+    <div class="entry">
+      <h3>제목을 입력하세요</h3>
+      <div class="gallery">
+        <img src="2025-C-01.jpg" alt="작업 이미지 1">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+      </div>
+      <p>
+        여기에 작업에 대한 설명을 씁니다.
+      </p>
+    </div>
+
   </details>
 
   <details id="d-2024">
@@ -270,9 +300,36 @@
 
   <details id="d-2017">
     <summary>2017</summary>
-    <ul class="list">
-      <li><span class="list-no">A</span><a class="title-link" href="#work-2017-A">6th of October Bridge Reimagined</a></li>
-    </ul>
+
+    <div class="entry">
+      <h3>6th of October Bridge Reimagined</h3>
+      <div class="gallery">
+        <img src="2017-A-01.jpg" alt="6th of October Bridge Reimagined 이미지 1">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+        <img src="2017-A-02.jpg" alt="6th of October Bridge Reimagined 이미지 2">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+        <img src="2017-A-03.jpg" alt="6th of October Bridge Reimagined 이미지 3">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+        <img src="2017-A-04.jpg" alt="6th of October Bridge Reimagined 이미지 4">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+        <img src="2017-A-05.jpg" alt="6th of October Bridge Reimagined 이미지 5">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+        <img src="2017-A-06.jpg" alt="6th of October Bridge Reimagined 이미지 6">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+        <img src="2017-A-07.jpg" alt="6th of October Bridge Reimagined 이미지 7">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+        <img src="2017-A-08.jpg" alt="6th of October Bridge Reimagined 이미지 8">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+        <img src="2017-A-09.jpg" alt="6th of October Bridge Reimagined 이미지 9">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+        <img src="2017-A-10.jpg" alt="6th of October Bridge Reimagined 이미지 10">
+        <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
+      </div>
+      <p>
+        여기에 작업에 대한 설명을 씁니다.
+      </p>
+    </div>
+
   </details>
 
   <details id="d-2016">
@@ -309,112 +366,75 @@
 
 <hr class="gold">
 
-<!-- ==========================================================
-     작업 상세 내용 — 평소엔 전부 숨겨져 있습니다. 위 목록에서
-     제목을 클릭했을 때 URL이 이 블록의 id와 일치하면 그
-     작업만 화면에 나타납니다.
-
-     새 작업을 추가할 때 할 일은 두 가지뿐입니다:
-     1) 위 연도의 <ul class="list"> 안에 <li> 한 줄 추가
-     2) 여기 아래에 <div class="entry"> 블록 하나 추가
-
-     사진 설명(캡션) 적는 법:
-     각 사진 <img> 태그 바로 밑에 있는
-     <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-     이 문장을 원하는 설명으로 바꿔 적으면 됩니다.
-     Ctrl+F(찾기)로 "✏️" 를 검색하면 아직 안 채운 칸을
-     순서대로 빠르게 찾아다닐 수 있습니다.
-     ========================================================== -->
-
-<div class="entry" id="work-2025-A">
-  <p class="entry-no">2025 · A</p>
-  <h3>Stillness Between Movements</h3>
-  <p class="entry-date">2025</p>
-
-  <div class="gallery">
-    <img src="2025-A-01.jpg" alt="2025-A 작업 이미지 1">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-  </div>
-
-  <p>
-    여기에 작업에 대한 설명을 씁니다.
-  </p>
-
-  <a class="top-link" href="#d-2025">← 목록으로</a>
-</div>
-
-<div class="entry" id="work-2025-B">
-  <p class="entry-no">2025 · B</p>
-  <h3>제목을 입력하세요</h3>
-  <p class="entry-date">2025</p>
-
-  <div class="gallery">
-    <img src="2025-B-01.jpg" alt="2025-B 작업 이미지 1">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-  </div>
-
-  <p>
-    여기에 작업에 대한 설명을 씁니다.
-  </p>
-
-  <a class="top-link" href="#d-2025">← 목록으로</a>
-</div>
-
-<div class="entry" id="work-2025-C">
-  <p class="entry-no">2025 · C</p>
-  <h3>제목을 입력하세요</h3>
-  <p class="entry-date">2025</p>
-
-  <div class="gallery">
-    <img src="2025-C-01.jpg" alt="2025-C 작업 이미지 1">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-  </div>
-
-  <p>
-    여기에 작업에 대한 설명을 씁니다.
-  </p>
-
-  <a class="top-link" href="#d-2025">← 목록으로</a>
-</div>
-
-<div class="entry" id="work-2017-A">
-  <p class="entry-no">2017 · A</p>
-  <h3>6th of October Bridge Reimagined</h3>
-  <p class="entry-date">2017</p>
-
-  <div class="gallery">
-    <img src="2017-A-01.jpg" alt="2017-A 작업 이미지 1">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-    <img src="2017-A-02.jpg" alt="2017-A 작업 이미지 2">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-    <img src="2017-A-03.jpg" alt="2017-A 작업 이미지 3">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-    <img src="2017-A-04.jpg" alt="2017-A 작업 이미지 4">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-    <img src="2017-A-05.jpg" alt="2017-A 작업 이미지 5">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-    <img src="2017-A-06.jpg" alt="2017-A 작업 이미지 6">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-    <img src="2017-A-07.jpg" alt="2017-A 작업 이미지 7">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-    <img src="2017-A-08.jpg" alt="2017-A 작업 이미지 8">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-    <img src="2017-A-09.jpg" alt="2017-A 작업 이미지 9">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-    <img src="2017-A-10.jpg" alt="2017-A 작업 이미지 10">
-    <p class="caption">✏️ 여기에 사진 설명을 적어주세요</p>
-  </div>
-
-  <p>
-    여기에 작업에 대한 설명을 씁니다.
-  </p>
-
-  <a class="top-link" href="#d-2017">← 목록으로</a>
-</div>
-
 <footer>
   © 2026 drqwing life
 </footer>
+
+<!-- ==========================================================
+     자동화 스크립트 — 각 연도(<details id="d-2025"> 등) 안에
+     <div class="entry"> 블록만 넣어두면, 이 스크립트가:
+       1) 제목만 모아 목록(ul.list)을 자동으로 만들고
+       2) 각 작업에 "2025 · A" 같은 번호를 자동으로 붙이고
+       3) "← 목록으로" 링크를 자동으로 달아줍니다
+     그래서 새 작업을 추가할 때 <div class="entry"> 블록 하나만
+     붙여넣으면 되고, 목록/번호/링크는 전혀 신경 쓸 필요가
+     없습니다. (프레임워크나 외부 라이브러리 없는 순수 자바스크립트)
+     ========================================================== -->
+<script>
+  document.querySelectorAll('.year-list details').forEach(function (details) {
+    var match = details.id.match(/d-(\d+)/);
+    if (!match) return;
+    var year = match[1];
+
+    var entries = details.querySelectorAll(':scope > .entry');
+    if (entries.length === 0) return; // 이 연도엔 아직 작업이 없음 → 안내 문구 그대로 둠
+
+    var list = document.createElement('ul');
+    list.className = 'list';
+
+    entries.forEach(function (entry, i) {
+      var letter = String.fromCharCode(65 + i); // A, B, C ...
+      var workId = 'work-' + year + '-' + letter;
+      entry.id = workId;
+
+      var h3 = entry.querySelector('h3');
+      var title = h3 ? h3.textContent : '(제목 없음)';
+
+      // 번호 자동 삽입 (예: "2025 · B")
+      var noEl = document.createElement('p');
+      noEl.className = 'entry-no';
+      noEl.textContent = year + ' · ' + letter;
+      entry.insertBefore(noEl, entry.firstChild);
+
+      // 목록 항목 자동 생성
+      var li = document.createElement('li');
+      var span = document.createElement('span');
+      span.className = 'list-no';
+      span.textContent = letter;
+      var a = document.createElement('a');
+      a.className = 'title-link';
+      a.href = '#' + workId;
+      a.textContent = title;
+      li.appendChild(span);
+      li.appendChild(a);
+      list.appendChild(li);
+
+      // "← 목록으로" 링크 자동 삽입
+      var back = document.createElement('a');
+      back.className = 'top-link';
+      back.href = '#' + details.id;
+      back.textContent = '← 목록으로';
+      entry.appendChild(back);
+    });
+
+    // 혹시 남아있는 "아직 등록된 작업이 없습니다" 문구는 지우고
+    var note = details.querySelector('.empty-note');
+    if (note) note.remove();
+
+    // summary 바로 다음에 목록 삽입
+    details.querySelector('summary').insertAdjacentElement('afterend', list);
+  });
+</script>
 
 </body>
 </html>
