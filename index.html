@@ -102,8 +102,38 @@
     font-style:italic;
   }
 
-  /* ---- 작업(entry) ---- */
-  .entry{ margin:0 0 56px; }
+  /* ---- 목록(제목만 보이는 부분) ---- */
+  ul.list{
+    list-style:none;
+    margin:0 0 30px;
+    padding:0;
+  }
+  ul.list li{
+    margin:0 0 14px;
+  }
+  ul.list a.title-link{
+    display:block;
+    font-size:18px;
+    color:#fff;
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+  }
+  ul.list a.title-link:hover{
+    border-bottom:1px solid #555;
+  }
+  ul.list .list-no{
+    font-size:12px;
+    letter-spacing:.1em;
+    color:#666;
+    margin-right:10px;
+  }
+
+  /* ---- 작업(entry) 상세 —
+     평소엔 숨겨져 있다가, 제목을 클릭하면(URL이 #work-... 로
+     바뀌면) 그 작업만 나타납니다. 자바스크립트 없이 순수
+     CSS(:target)로 작동해서 아주 견고합니다. ---- */
+  .entry{ display:none; margin:24px 0 40px; }
+  .entry:target{ display:block; }
 
   .entry-no{
     font-size:12px;
@@ -202,7 +232,19 @@
   <h2 class="year-title">2025</h2>
 
   <!-- ----------------------------------------------------------
-       작업(entry) 템플릿 — 이 연도 안에 새 작업을 추가하려면
+       목록 — 제목을 클릭하면 아래 숨겨진 해당 작업이 나타납니다.
+       새 작업을 추가하려면 여기에 <li> 한 줄과, 아래에
+       <div class="entry"> 블록을 같이 추가하세요.
+       ---------------------------------------------------------- -->
+  <ul class="list">
+    <li><span class="list-no">A</span><a class="title-link" href="#work-2025-A">제목을 입력하세요</a></li>
+    <li><span class="list-no">B</span><a class="title-link" href="#work-2025-B">제목을 입력하세요</a></li>
+    <li><span class="list-no">C</span><a class="title-link" href="#work-2025-C">제목을 입력하세요</a></li>
+  </ul>
+
+  <!-- ----------------------------------------------------------
+       작업(entry) 상세 — 평소엔 숨겨져 있습니다 (위 목록에서
+       제목을 클릭했을 때만 나타남). 새 작업을 추가하려면
        이 <div class="entry"> 블록 전체를 복사해서 바로 아래에
        붙여넣고, id/알파벳/내용/사진 파일명만 바꾸세요.
        ---------------------------------------------------------- -->
@@ -220,7 +262,7 @@
       여기에 작업에 대한 설명을 씁니다.
     </p>
 
-    <a class="top-link" href="#top">↑ 맨 위로</a>
+    <a class="top-link" href="#year-2025">← 목록으로</a>
   </div>
 
   <div class="entry" id="work-2025-B">
@@ -236,7 +278,7 @@
       여기에 작업에 대한 설명을 씁니다.
     </p>
 
-    <a class="top-link" href="#top">↑ 맨 위로</a>
+    <a class="top-link" href="#year-2025">← 목록으로</a>
   </div>
 
   <div class="entry" id="work-2025-C">
@@ -252,7 +294,7 @@
       여기에 작업에 대한 설명을 씁니다.
     </p>
 
-    <a class="top-link" href="#top">↑ 맨 위로</a>
+    <a class="top-link" href="#year-2025">← 목록으로</a>
   </div>
 
 </section>
@@ -261,6 +303,10 @@
 
 <section id="year-2017">
   <h2 class="year-title">2017</h2>
+
+  <ul class="list">
+    <li><span class="list-no">A</span><a class="title-link" href="#work-2017-A">제목을 입력하세요</a></li>
+  </ul>
 
   <div class="entry" id="work-2017-A">
     <p class="entry-no">2017 · A</p>
@@ -285,7 +331,7 @@
       여기에 작업에 대한 설명을 씁니다.
     </p>
 
-    <a class="top-link" href="#top">↑ 맨 위로</a>
+    <a class="top-link" href="#year-2017">← 목록으로</a>
   </div>
 
 </section>
