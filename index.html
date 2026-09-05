@@ -7,10 +7,9 @@
 <style>
 
   /* ==========================================================
-     파일 하나로 전부 작동합니다 (index.html 하나만 관리하면 됨).
-     - 시스템 폰트 위주 (Minion Pro는 컴퓨터에 설치되어 있으면
-       보이고, 없으면 자동으로 세리프체로 대체됩니다)
-     - JS는 "대표 이미지 자동 표시" 한 가지에만 사용
+     파일 하나로 전부 작동합니다. 자바스크립트 전혀 없음 —
+     순수 HTML + CSS만으로 "펼치기/접기"와 "작업 하나만 보기"를
+     구현했습니다 (<details> 태그와 CSS :target 기능 사용).
      ========================================================== */
 
   body{
@@ -59,79 +58,77 @@
     margin:0 0 30px;
   }
 
-  nav.years{
-    text-align:center;
-    font-size:13px;
-    margin-bottom:30px;
-    color:#888;
-  }
-  nav.years a{
-    text-decoration:none;
-    border-bottom:1px dotted #555;
-  }
-  nav.years .sep{ color:#444; margin:0 8px; }
-
-  .featured-image{
-    display:block;
-    width:100%;
-    height:auto;
+  /* ---- 연도 목록 (메인 화면) ---- */
+  .year-list{
     margin:0 0 10px;
-    border:1px solid #333;
-  }
-  .featured-caption{
-    text-align:center;
-    font-size:12px;
-    color:#666;
-    margin:0 0 40px;
-    letter-spacing:.05em;
   }
 
-  .year-title{
+  .year-list details{
+    border-bottom:1px solid #262626;
+  }
+
+  .year-list summary{
+    cursor:pointer;
+    padding:14px 4px;
+    font-size:19px;
+    letter-spacing:.1em;
     color:#fff;
-    font-weight:normal;
-    font-size:15px;
-    letter-spacing:.25em;
-    text-align:center;
-    margin:0 0 40px;
+    list-style:none;            /* 브라우저 기본 삼각형 숨기고 */
+  }
+  .year-list summary::-webkit-details-marker{ display:none; }
+
+  /* 우리가 직접 삼각형을 그려서, 열렸을 때 아래로 회전시킵니다 */
+  .year-list summary::before{
+    content:"▸";
+    display:inline-block;
+    color:#c9a227;
+    margin-right:12px;
+    transition: transform .15s ease;
+  }
+  .year-list details[open] summary::before{
+    transform: rotate(90deg);
   }
 
-  .empty-note{
-    text-align:center;
+  .year-list summary:hover{
+    color:#c9a227;
+  }
+
+  .year-list .empty-note{
+    padding:0 4px 18px 30px;
     font-size:13px;
     color:#555;
     font-style:italic;
   }
 
-  /* ---- 목록(제목만 보이는 부분) ---- */
+  /* ---- 연도 안의 작업 목록 ---- */
   ul.list{
     list-style:none;
-    margin:0 0 30px;
-    padding:0;
+    margin:0;
+    padding:0 4px 18px 30px;
   }
   ul.list li{
-    margin:0 0 14px;
+    margin:0 0 10px;
   }
   ul.list a.title-link{
-    display:block;
-    font-size:18px;
-    color:#fff;
+    font-size:16px;
+    color:#cfcfcf;
     text-decoration:none;
-    border-bottom:1px solid transparent;
+    border-bottom:1px dotted #555;
   }
   ul.list a.title-link:hover{
-    border-bottom:1px solid #555;
+    color:#fff;
+    border-bottom:1px solid #999;
   }
   ul.list .list-no{
     font-size:12px;
     letter-spacing:.1em;
     color:#666;
-    margin-right:10px;
+    margin-right:8px;
   }
 
   /* ---- 작업(entry) 상세 —
-     평소엔 숨겨져 있다가, 제목을 클릭하면(URL이 #work-... 로
-     바뀌면) 그 작업만 나타납니다. 자바스크립트 없이 순수
-     CSS(:target)로 작동해서 아주 견고합니다. ---- */
+     평소엔 숨겨져 있다가, 목록에서 제목을 클릭하면(URL이
+     #work-... 로 바뀌면) 그 작업만 나타납니다. ---- */
   .entry{ display:none; margin:24px 0 40px; }
   .entry:target{ display:block; }
 
@@ -156,7 +153,8 @@
   }
 
   /* 사진 갤러리 — 한 작업에 사진이 몇 장이든 이 안에
-     <img> 태그를 나열하면 세로로 쭉 나옵니다. */
+     <img> 태그를 나열하면 세로로 쭉 나옵니다. 사진이
+     없어도 전혀 문제 없습니다(설명만으로도 완전히 작동). */
   .gallery img{
     display:block;
     width:100%;
@@ -193,186 +191,196 @@
 <h1 id="top">DRQWING LIFE</h1>
 <p class="subtitle">Personal Project Archive</p>
 
+<hr class="gold">
+
 <!-- ==========================================================
-     연도 목차(nav) — 새 연도가 생기면 여기에 링크 한 칸을
-     추가하세요. href는 아래 <section id="year-XXXX"> 의 id와
-     똑같아야 합니다. 최신 연도를 왼쪽에 두세요.
+     연도 목록 — 2026부터 2011까지. 화살표(▸)를 클릭하면
+     펼쳐지고, 다시 클릭하면 접힙니다. 자바스크립트 없이
+     HTML의 <details> 기능만으로 작동해서 매우 안정적입니다
+     (마우스가 살짝 벗어나도 닫히지 않고, 다시 클릭해야 닫힘).
+
+     연도 안에 작업이 있으면 <ul class="list"> 목록을,
+     없으면 그냥 안내 문구만 넣어두면 됩니다.
      ========================================================== -->
-<nav class="years">
-  <a href="#year-2026">2026</a><span class="sep">·</span><a href="#year-2025">2025</a><span class="sep">·</span><a href="#year-2017">2017</a>
-</nav>
+
+<div class="year-list">
+
+  <details id="d-2026">
+    <summary>2026</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2025">
+    <summary>2025</summary>
+    <ul class="list">
+      <li><span class="list-no">A</span><a class="title-link" href="#work-2025-A">제목을 입력하세요</a></li>
+      <li><span class="list-no">B</span><a class="title-link" href="#work-2025-B">제목을 입력하세요</a></li>
+      <li><span class="list-no">C</span><a class="title-link" href="#work-2025-C">제목을 입력하세요</a></li>
+    </ul>
+  </details>
+
+  <details id="d-2024">
+    <summary>2024</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2023">
+    <summary>2023</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2022">
+    <summary>2022</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2021">
+    <summary>2021</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2020">
+    <summary>2020</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2019">
+    <summary>2019</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2018">
+    <summary>2018</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2017">
+    <summary>2017</summary>
+    <ul class="list">
+      <li><span class="list-no">A</span><a class="title-link" href="#work-2017-A">제목을 입력하세요</a></li>
+    </ul>
+  </details>
+
+  <details id="d-2016">
+    <summary>2016</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2015">
+    <summary>2015</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2014">
+    <summary>2014</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2013">
+    <summary>2013</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2012">
+    <summary>2012</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+  <details id="d-2011">
+    <summary>2011</summary>
+    <p class="empty-note">아직 등록된 작업이 없습니다.</p>
+  </details>
+
+</div>
 
 <hr class="gold">
 
 <!-- ==========================================================
-     대표 이미지 — "가장 최근 연도"에 있는 "그 연도의 마지막
-     작업"의 첫 번째 사진을 자동으로 보여줍니다. 파일명이
-     뭐든 상관없이, 실제 화면에 있는 이미지를 그대로 읽어오기
-     때문에 따로 신경 쓸 게 없습니다.
-     ========================================================== -->
-<a id="featured-link" href="#top">
-  <img id="featured-image" class="featured-image" src="" alt="가장 최근 작업">
-</a>
-<p id="featured-caption" class="featured-caption"></p>
+     작업 상세 내용 — 평소엔 전부 숨겨져 있습니다. 위 목록에서
+     제목을 클릭했을 때 URL이 이 블록의 id와 일치하면 그
+     작업만 화면에 나타납니다.
 
-<!-- ==========================================================
-     연도 섹션 — 새 연도를 추가하려면 <section> 블록 전체를
-     복사해서 id와 제목 숫자를 바꾸고, 위쪽 nav에도 링크를
-     추가하세요.
+     새 작업을 추가할 때 할 일은 두 가지뿐입니다:
+     1) 위 연도의 <ul class="list"> 안에 <li> 한 줄 추가
+     2) 여기 아래에 <div class="entry"> 블록 하나 추가
      ========================================================== -->
 
-<section id="year-2026">
-  <h2 class="year-title">2026</h2>
-  <p class="empty-note">아직 등록된 작업이 없습니다.</p>
-</section>
+<div class="entry" id="work-2025-A">
+  <p class="entry-no">2025 · A</p>
+  <h3>제목을 입력하세요</h3>
+  <p class="entry-date">2025</p>
 
-<hr>
-
-<section id="year-2025">
-  <h2 class="year-title">2025</h2>
-
-  <!-- ----------------------------------------------------------
-       목록 — 제목을 클릭하면 아래 숨겨진 해당 작업이 나타납니다.
-       새 작업을 추가하려면 여기에 <li> 한 줄과, 아래에
-       <div class="entry"> 블록을 같이 추가하세요.
-       ---------------------------------------------------------- -->
-  <ul class="list">
-    <li><span class="list-no">A</span><a class="title-link" href="#work-2025-A">제목을 입력하세요</a></li>
-    <li><span class="list-no">B</span><a class="title-link" href="#work-2025-B">제목을 입력하세요</a></li>
-    <li><span class="list-no">C</span><a class="title-link" href="#work-2025-C">제목을 입력하세요</a></li>
-  </ul>
-
-  <!-- ----------------------------------------------------------
-       작업(entry) 상세 — 평소엔 숨겨져 있습니다 (위 목록에서
-       제목을 클릭했을 때만 나타남). 새 작업을 추가하려면
-       이 <div class="entry"> 블록 전체를 복사해서 바로 아래에
-       붙여넣고, id/알파벳/내용/사진 파일명만 바꾸세요.
-       ---------------------------------------------------------- -->
-
-  <div class="entry" id="work-2025-A">
-    <p class="entry-no">2025 · A</p>
-    <h3>제목을 입력하세요</h3>
-    <p class="entry-date">2025</p>
-
-    <div class="gallery">
-      <img src="2025-A-01.jpg" alt="2025-A 작업 이미지 1">
-    </div>
-
-    <p>
-      여기에 작업에 대한 설명을 씁니다.
-    </p>
-
-    <a class="top-link" href="#year-2025">← 목록으로</a>
+  <div class="gallery">
+    <img src="2025-A-01.jpg" alt="2025-A 작업 이미지 1">
   </div>
 
-  <div class="entry" id="work-2025-B">
-    <p class="entry-no">2025 · B</p>
-    <h3>제목을 입력하세요</h3>
-    <p class="entry-date">2025</p>
+  <p>
+    여기에 작업에 대한 설명을 씁니다.
+  </p>
 
-    <div class="gallery">
-      <img src="2025-B-01.jpg" alt="2025-B 작업 이미지 1">
-    </div>
+  <a class="top-link" href="#d-2025">← 목록으로</a>
+</div>
 
-    <p>
-      여기에 작업에 대한 설명을 씁니다.
-    </p>
+<div class="entry" id="work-2025-B">
+  <p class="entry-no">2025 · B</p>
+  <h3>제목을 입력하세요</h3>
+  <p class="entry-date">2025</p>
 
-    <a class="top-link" href="#year-2025">← 목록으로</a>
+  <div class="gallery">
+    <img src="2025-B-01.jpg" alt="2025-B 작업 이미지 1">
   </div>
 
-  <div class="entry" id="work-2025-C">
-    <p class="entry-no">2025 · C</p>
-    <h3>제목을 입력하세요</h3>
-    <p class="entry-date">2025</p>
+  <p>
+    여기에 작업에 대한 설명을 씁니다.
+  </p>
 
-    <div class="gallery">
-      <img src="2025-C-01.jpg" alt="2025-C 작업 이미지 1">
-    </div>
+  <a class="top-link" href="#d-2025">← 목록으로</a>
+</div>
 
-    <p>
-      여기에 작업에 대한 설명을 씁니다.
-    </p>
+<div class="entry" id="work-2025-C">
+  <p class="entry-no">2025 · C</p>
+  <h3>제목을 입력하세요</h3>
+  <p class="entry-date">2025</p>
 
-    <a class="top-link" href="#year-2025">← 목록으로</a>
+  <div class="gallery">
+    <img src="2025-C-01.jpg" alt="2025-C 작업 이미지 1">
   </div>
 
-</section>
+  <p>
+    여기에 작업에 대한 설명을 씁니다.
+  </p>
 
-<hr>
+  <a class="top-link" href="#d-2025">← 목록으로</a>
+</div>
 
-<section id="year-2017">
-  <h2 class="year-title">2017</h2>
+<div class="entry" id="work-2017-A">
+  <p class="entry-no">2017 · A</p>
+  <h3>제목을 입력하세요</h3>
+  <p class="entry-date">2017</p>
 
-  <ul class="list">
-    <li><span class="list-no">A</span><a class="title-link" href="#work-2017-A">제목을 입력하세요</a></li>
-  </ul>
-
-  <div class="entry" id="work-2017-A">
-    <p class="entry-no">2017 · A</p>
-    <h3>제목을 입력하세요</h3>
-    <p class="entry-date">2017</p>
-
-    <!-- 사진이 10장이면 이렇게 <img> 를 10줄 나열하면 됩니다 -->
-    <div class="gallery">
-      <img src="2017-A-01.jpg" alt="2017-A 작업 이미지 1">
-      <img src="2017-A-02.jpg" alt="2017-A 작업 이미지 2">
-      <img src="2017-A-03.jpg" alt="2017-A 작업 이미지 3">
-      <img src="2017-A-04.jpg" alt="2017-A 작업 이미지 4">
-      <img src="2017-A-05.jpg" alt="2017-A 작업 이미지 5">
-      <img src="2017-A-06.jpg" alt="2017-A 작업 이미지 6">
-      <img src="2017-A-07.jpg" alt="2017-A 작업 이미지 7">
-      <img src="2017-A-08.jpg" alt="2017-A 작업 이미지 8">
-      <img src="2017-A-09.jpg" alt="2017-A 작업 이미지 9">
-      <img src="2017-A-10.jpg" alt="2017-A 작업 이미지 10">
-    </div>
-
-    <p>
-      여기에 작업에 대한 설명을 씁니다.
-    </p>
-
-    <a class="top-link" href="#year-2017">← 목록으로</a>
+  <div class="gallery">
+    <img src="2017-A-01.jpg" alt="2017-A 작업 이미지 1">
+    <img src="2017-A-02.jpg" alt="2017-A 작업 이미지 2">
+    <img src="2017-A-03.jpg" alt="2017-A 작업 이미지 3">
+    <img src="2017-A-04.jpg" alt="2017-A 작업 이미지 4">
+    <img src="2017-A-05.jpg" alt="2017-A 작업 이미지 5">
+    <img src="2017-A-06.jpg" alt="2017-A 작업 이미지 6">
+    <img src="2017-A-07.jpg" alt="2017-A 작업 이미지 7">
+    <img src="2017-A-08.jpg" alt="2017-A 작업 이미지 8">
+    <img src="2017-A-09.jpg" alt="2017-A 작업 이미지 9">
+    <img src="2017-A-10.jpg" alt="2017-A 작업 이미지 10">
   </div>
 
-</section>
+  <p>
+    여기에 작업에 대한 설명을 씁니다.
+  </p>
 
-<hr>
+  <a class="top-link" href="#d-2017">← 목록으로</a>
+</div>
 
 <footer>
   © 2026 DRQWING LIFE
 </footer>
-
-<!-- ==========================================================
-     대표 이미지 자동 표시 스크립트 — "연도 순서상 가장 위에 있는,
-     실제 작업이 있는 섹션"을 찾아서, 그 섹션의 마지막 작업의
-     첫 번째 사진을 그대로 가져와 보여줍니다. 파일명 규칙에
-     의존하지 않고 실제 화면 요소를 읽어오기 때문에, 이름을
-     어떻게 짓든 항상 정확하게 작동합니다.
-     ========================================================== -->
-<script>
-  var sections = document.querySelectorAll('section[id^="year-"]');
-  var targetEntry = null;
-
-  for (var i = 0; i < sections.length; i++) {
-    var entries = sections[i].querySelectorAll('.entry');
-    if (entries.length > 0) {
-      targetEntry = entries[entries.length - 1];
-      break;
-    }
-  }
-
-  if (targetEntry) {
-    var firstImg = targetEntry.querySelector('.gallery img');
-    var titleEl = targetEntry.querySelector('h3');
-    if (firstImg) {
-      document.getElementById('featured-image').src = firstImg.getAttribute('src');
-      document.getElementById('featured-link').href = '#' + targetEntry.id;
-      if (titleEl) {
-        document.getElementById('featured-caption').textContent = titleEl.textContent;
-      }
-    }
-  }
-</script>
 
 </body>
 </html>
