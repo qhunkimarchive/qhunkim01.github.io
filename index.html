@@ -12,7 +12,7 @@
     font-family: Georgia, "Times New Roman", Times, serif;
     font-size:16px;
     line-height:1.7;
-    max-width:640px;
+    max-width:760px;
     margin:0 auto;
     padding:40px 20px 120px;
   }
@@ -26,22 +26,30 @@
     margin:40px 0;
   }
 
+  hr.gold{
+    border-top:2px solid #c9a227;
+    margin:24px 0;
+  }
+
   h1{
-    color:#fff;
-    font-weight:normal;
-    font-size:28px;
-    letter-spacing:.08em;
+    color:#c9a227;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    font-size:52px;
+    letter-spacing:.06em;
     text-align:center;
-    margin:0 0 4px;
+    margin:0 0 10px;
   }
 
   .subtitle{
     text-align:center;
-    font-size:13px;
-    letter-spacing:.15em;
-    color:#777;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:15px;
+    font-weight:bold;
+    letter-spacing:.04em;
+    color:#8a7d55;
     text-transform:uppercase;
-    margin:0 0 40px;
+    margin:0 0 30px;
   }
 
   nav.years{
@@ -103,6 +111,14 @@
     margin-top:4px;
   }
 
+  .featured-image{
+    display:block;
+    width:100%;
+    height:auto;
+    margin:0 0 40px;
+    border:1px solid #333;
+  }
+
   footer{
     text-align:center;
     font-size:12px;
@@ -114,7 +130,9 @@
 </head>
 <body>
 
-<h1 id="top">D R A W I N G &nbsp; L I F E</h1>
+<hr class="gold" style="margin-top:0;">
+
+<h1 id="top">DRAWING LIFE</h1>
 <p class="subtitle">Personal Project Archive</p>
 
 <!-- ==========================================================
@@ -126,7 +144,19 @@
   <a href="#year-2026">2026</a><span class="sep">·</span><a href="#year-2025">2025</a>
 </nav>
 
-<hr>
+<hr class="gold">
+
+<!-- ==========================================================
+     대표 이미지 — 항상 "가장 최근에 추가한 작업"의 사진을
+     자동으로 보여줍니다. 목록 맨 마지막 <li> 안의 링크
+     (예: entry-004.html)에서 숫자를 읽어서, 같은 번호의
+     사진(project-04.jpg)을 자동으로 찾아 보여줍니다.
+     그래서 새 작업의 entry 번호와 사진 번호만 맞춰주면 되고,
+     따로 적어줘야 하는 건 없습니다.
+     ========================================================== -->
+<a id="featured-link" href="#">
+  <img id="featured-image" class="featured-image" src="project-01.jpg" alt="가장 최근 작업">
+</a>
 
 <!-- ==========================================================
      연도별 작업 목록 — 새 작업을 추가하려면:
@@ -169,6 +199,28 @@
 <footer>
   © 2026 DRAWING LIFE
 </footer>
+
+<!-- ==========================================================
+     아주 짧은 자바스크립트 한 조각 — 프레임워크나 외부 라이브러리
+     없이, 목록의 맨 마지막 작업 링크(entry-XXX.html)에서 숫자를
+     읽어와 같은 번호의 사진(project-XX.jpg)을 대표 이미지로
+     자동 연결해줍니다. 새 항목을 추가할 때 entry 번호와 사진
+     번호만 맞춰두면 이 부분은 신경 쓰지 않아도 됩니다.
+     ========================================================== -->
+<script>
+  var links = document.querySelectorAll('ul.list a.title-link');
+  if (links.length > 0) {
+    var lastLink = links[links.length - 1];
+    var href = lastLink.getAttribute('href');           // 예: "entry-003.html"
+    var match = href.match(/(\d+)/);                    // 숫자만 추출: "003"
+    if (match) {
+      var num = parseInt(match[1], 10);                 // 3
+      var padded = (num < 10 ? '0' : '') + num;          // "03"
+      document.getElementById('featured-image').src = 'project-' + padded + '.jpg';
+      document.getElementById('featured-link').href = href;
+    }
+  }
+</script>
 
 </body>
 </html>
