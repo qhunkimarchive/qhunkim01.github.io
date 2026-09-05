@@ -3,8 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DRAWING LIFE</title>
+<title>DRQWING LIFE</title>
 <style>
+
+  /* ==========================================================
+     파일 하나로 전부 작동합니다 (index.html 하나만 관리하면 됨).
+     - 시스템 폰트 위주 (Minion Pro는 컴퓨터에 설치되어 있으면
+       보이고, 없으면 자동으로 세리프체로 대체됩니다)
+     - JS는 "대표 이미지 자동 표시" 한 가지에만 사용
+     ========================================================== */
 
   body{
     background:#000;
@@ -32,8 +39,8 @@
   }
 
   h1{
-    color:#c9a227;
-    font-family: Helvetica, Arial, sans-serif;
+    color:#d21f1f;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
     font-weight:bold;
     font-size:52px;
     letter-spacing:.06em;
@@ -55,7 +62,7 @@
   nav.years{
     text-align:center;
     font-size:13px;
-    margin-bottom:40px;
+    margin-bottom:30px;
     color:#888;
   }
   nav.years a{
@@ -64,60 +71,81 @@
   }
   nav.years .sep{ color:#444; margin:0 8px; }
 
+  .featured-image{
+    display:block;
+    width:100%;
+    height:auto;
+    margin:0 0 10px;
+    border:1px solid #333;
+  }
+  .featured-caption{
+    text-align:center;
+    font-size:12px;
+    color:#666;
+    margin:0 0 40px;
+    letter-spacing:.05em;
+  }
+
   .year-title{
     color:#fff;
     font-weight:normal;
     font-size:15px;
     letter-spacing:.25em;
-    margin:0 0 22px;
+    text-align:center;
+    margin:0 0 40px;
   }
 
   .empty-note{
+    text-align:center;
     font-size:13px;
     color:#555;
     font-style:italic;
   }
 
-  /* ---- 목록 항목 ---- */
-  ul.list{
-    list-style:none;
-    margin:0 0 20px;
-    padding:0;
-  }
-  ul.list li{
-    margin:0 0 22px;
-  }
-  ul.list a.title-link{
-    display:block;
-    font-size:19px;
-    color:#fff;
-    text-decoration:none;
-    border-bottom:1px solid transparent;
-  }
-  ul.list a.title-link:hover{
-    border-bottom:1px solid #555;
-  }
-  ul.list .list-no{
+  /* ---- 작업(entry) ---- */
+  .entry{ margin:0 0 56px; }
+
+  .entry-no{
     font-size:12px;
-    letter-spacing:.1em;
+    letter-spacing:.15em;
     color:#666;
-    display:block;
-    margin-bottom:4px;
-  }
-  ul.list .list-date{
-    font-size:12px;
-    color:#777;
-    display:block;
-    margin-top:4px;
+    margin:0 0 6px;
   }
 
-  .featured-image{
+  .entry h3{
+    color:#fff;
+    font-weight:normal;
+    font-size:21px;
+    margin:0 0 4px;
+  }
+
+  .entry-date{
+    font-size:12px;
+    color:#777;
+    margin:0 0 18px;
+  }
+
+  /* 사진 갤러리 — 한 작업에 사진이 몇 장이든 이 안에
+     <img> 태그를 나열하면 세로로 쭉 나옵니다. */
+  .gallery img{
     display:block;
     width:100%;
     height:auto;
-    margin:0 0 40px;
+    margin:0 0 10px;
     border:1px solid #333;
   }
+  .gallery{ margin:0 0 18px; }
+
+  .entry p{ margin:0 0 1em; }
+
+  .entry .top-link{
+    display:block;
+    margin-top:18px;
+    font-size:12px;
+    color:#555;
+    text-decoration:none;
+  }
+  .entry .top-link:hover{ color:#999; }
 
   footer{
     text-align:center;
@@ -132,37 +160,35 @@
 
 <hr class="gold" style="margin-top:0;">
 
-<h1 id="top">DRAWING LIFE</h1>
+<h1 id="top">DRQWING LIFE</h1>
 <p class="subtitle">Personal Project Archive</p>
 
 <!-- ==========================================================
      연도 목차(nav) — 새 연도가 생기면 여기에 링크 한 칸을
      추가하세요. href는 아래 <section id="year-XXXX"> 의 id와
-     똑같아야 합니다.
+     똑같아야 합니다. 최신 연도를 왼쪽에 두세요.
      ========================================================== -->
 <nav class="years">
-  <a href="#year-2026">2026</a><span class="sep">·</span><a href="#year-2025">2025</a>
+  <a href="#year-2026">2026</a><span class="sep">·</span><a href="#year-2025">2025</a><span class="sep">·</span><a href="#year-2017">2017</a>
 </nav>
 
 <hr class="gold">
 
 <!-- ==========================================================
-     대표 이미지 — 항상 "가장 최근에 추가한 작업"의 사진을
-     자동으로 보여줍니다. 목록 맨 마지막 <li> 안의 링크
-     (예: entry-004.html)에서 숫자를 읽어서, 같은 번호의
-     사진(project-04.jpg)을 자동으로 찾아 보여줍니다.
-     그래서 새 작업의 entry 번호와 사진 번호만 맞춰주면 되고,
-     따로 적어줘야 하는 건 없습니다.
+     대표 이미지 — "가장 최근 연도"에 있는 "그 연도의 마지막
+     작업"의 첫 번째 사진을 자동으로 보여줍니다. 파일명이
+     뭐든 상관없이, 실제 화면에 있는 이미지를 그대로 읽어오기
+     때문에 따로 신경 쓸 게 없습니다.
      ========================================================== -->
-<a id="featured-link" href="#">
-  <img id="featured-image" class="featured-image" src="project-01.jpg" alt="가장 최근 작업">
+<a id="featured-link" href="#top">
+  <img id="featured-image" class="featured-image" src="" alt="가장 최근 작업">
 </a>
+<p id="featured-caption" class="featured-caption"></p>
 
 <!-- ==========================================================
-     연도별 작업 목록 — 새 작업을 추가하려면:
-     1) entry-XXX.html 이라는 새 파일을 만들고 (아래 개별 페이지와
-        같은 형식으로 내용을 채운 뒤)
-     2) 이 목록에 <li> 한 줄을 추가해서 그 파일로 링크하세요.
+     연도 섹션 — 새 연도를 추가하려면 <section> 블록 전체를
+     복사해서 id와 제목 숫자를 바꾸고, 위쪽 nav에도 링크를
+     추가하세요.
      ========================================================== -->
 
 <section id="year-2026">
@@ -175,49 +201,129 @@
 <section id="year-2025">
   <h2 class="year-title">2025</h2>
 
-  <ul class="list">
-    <li>
-      <span class="list-no">NO. 001</span>
-      <a class="title-link" href="entry-001.html">첫 번째 작업 제목</a>
-      <span class="list-date">2025</span>
-    </li>
-    <li>
-      <span class="list-no">NO. 002</span>
-      <a class="title-link" href="entry-002.html">두 번째 작업 제목</a>
-      <span class="list-date">2025</span>
-    </li>
-    <li>
-      <span class="list-no">NO. 003</span>
-      <a class="title-link" href="entry-003.html">세 번째 작업 제목</a>
-      <span class="list-date">2025</span>
-    </li>
-  </ul>
+  <!-- ----------------------------------------------------------
+       작업(entry) 템플릿 — 이 연도 안에 새 작업을 추가하려면
+       이 <div class="entry"> 블록 전체를 복사해서 바로 아래에
+       붙여넣고, id/알파벳/내용/사진 파일명만 바꾸세요.
+       ---------------------------------------------------------- -->
+
+  <div class="entry" id="work-2025-A">
+    <p class="entry-no">2025 · A</p>
+    <h3>제목을 입력하세요</h3>
+    <p class="entry-date">2025</p>
+
+    <div class="gallery">
+      <img src="2025-A-01.jpg" alt="2025-A 작업 이미지 1">
+    </div>
+
+    <p>
+      여기에 작업에 대한 설명을 씁니다.
+    </p>
+
+    <a class="top-link" href="#top">↑ 맨 위로</a>
+  </div>
+
+  <div class="entry" id="work-2025-B">
+    <p class="entry-no">2025 · B</p>
+    <h3>제목을 입력하세요</h3>
+    <p class="entry-date">2025</p>
+
+    <div class="gallery">
+      <img src="2025-B-01.jpg" alt="2025-B 작업 이미지 1">
+    </div>
+
+    <p>
+      여기에 작업에 대한 설명을 씁니다.
+    </p>
+
+    <a class="top-link" href="#top">↑ 맨 위로</a>
+  </div>
+
+  <div class="entry" id="work-2025-C">
+    <p class="entry-no">2025 · C</p>
+    <h3>제목을 입력하세요</h3>
+    <p class="entry-date">2025</p>
+
+    <div class="gallery">
+      <img src="2025-C-01.jpg" alt="2025-C 작업 이미지 1">
+    </div>
+
+    <p>
+      여기에 작업에 대한 설명을 씁니다.
+    </p>
+
+    <a class="top-link" href="#top">↑ 맨 위로</a>
+  </div>
+
+</section>
+
+<hr>
+
+<section id="year-2017">
+  <h2 class="year-title">2017</h2>
+
+  <div class="entry" id="work-2017-A">
+    <p class="entry-no">2017 · A</p>
+    <h3>제목을 입력하세요</h3>
+    <p class="entry-date">2017</p>
+
+    <!-- 사진이 10장이면 이렇게 <img> 를 10줄 나열하면 됩니다 -->
+    <div class="gallery">
+      <img src="2017-A-01.jpg" alt="2017-A 작업 이미지 1">
+      <img src="2017-A-02.jpg" alt="2017-A 작업 이미지 2">
+      <img src="2017-A-03.jpg" alt="2017-A 작업 이미지 3">
+      <img src="2017-A-04.jpg" alt="2017-A 작업 이미지 4">
+      <img src="2017-A-05.jpg" alt="2017-A 작업 이미지 5">
+      <img src="2017-A-06.jpg" alt="2017-A 작업 이미지 6">
+      <img src="2017-A-07.jpg" alt="2017-A 작업 이미지 7">
+      <img src="2017-A-08.jpg" alt="2017-A 작업 이미지 8">
+      <img src="2017-A-09.jpg" alt="2017-A 작업 이미지 9">
+      <img src="2017-A-10.jpg" alt="2017-A 작업 이미지 10">
+    </div>
+
+    <p>
+      여기에 작업에 대한 설명을 씁니다.
+    </p>
+
+    <a class="top-link" href="#top">↑ 맨 위로</a>
+  </div>
+
 </section>
 
 <hr>
 
 <footer>
-  © 2026 DRAWING LIFE
+  © 2026 DRQWING LIFE
 </footer>
 
 <!-- ==========================================================
-     아주 짧은 자바스크립트 한 조각 — 프레임워크나 외부 라이브러리
-     없이, 목록의 맨 마지막 작업 링크(entry-XXX.html)에서 숫자를
-     읽어와 같은 번호의 사진(project-XX.jpg)을 대표 이미지로
-     자동 연결해줍니다. 새 항목을 추가할 때 entry 번호와 사진
-     번호만 맞춰두면 이 부분은 신경 쓰지 않아도 됩니다.
+     대표 이미지 자동 표시 스크립트 — "연도 순서상 가장 위에 있는,
+     실제 작업이 있는 섹션"을 찾아서, 그 섹션의 마지막 작업의
+     첫 번째 사진을 그대로 가져와 보여줍니다. 파일명 규칙에
+     의존하지 않고 실제 화면 요소를 읽어오기 때문에, 이름을
+     어떻게 짓든 항상 정확하게 작동합니다.
      ========================================================== -->
 <script>
-  var links = document.querySelectorAll('ul.list a.title-link');
-  if (links.length > 0) {
-    var lastLink = links[links.length - 1];
-    var href = lastLink.getAttribute('href');           // 예: "entry-003.html"
-    var match = href.match(/(\d+)/);                    // 숫자만 추출: "003"
-    if (match) {
-      var num = parseInt(match[1], 10);                 // 3
-      var padded = (num < 10 ? '0' : '') + num;          // "03"
-      document.getElementById('featured-image').src = 'project-' + padded + '.jpg';
-      document.getElementById('featured-link').href = href;
+  var sections = document.querySelectorAll('section[id^="year-"]');
+  var targetEntry = null;
+
+  for (var i = 0; i < sections.length; i++) {
+    var entries = sections[i].querySelectorAll('.entry');
+    if (entries.length > 0) {
+      targetEntry = entries[entries.length - 1];
+      break;
+    }
+  }
+
+  if (targetEntry) {
+    var firstImg = targetEntry.querySelector('.gallery img');
+    var titleEl = targetEntry.querySelector('h3');
+    if (firstImg) {
+      document.getElementById('featured-image').src = firstImg.getAttribute('src');
+      document.getElementById('featured-link').href = '#' + targetEntry.id;
+      if (titleEl) {
+        document.getElementById('featured-caption').textContent = titleEl.textContent;
+      }
     }
   }
 </script>
